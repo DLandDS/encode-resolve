@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+    echo "enter the format file!";
+    exit;
+fi
+
+for f in *.$1; do
+    if [ "$f" = "*.$1" ]; then
+    echo "File not found";
+    break;
+    fi
+    echo "converting video $f"
+    ffmpeg -i "$f" -acodec pcm_s16le -c:v mpeg4 -q:v 2 "$f.mov" -loglevel warning -hide_banner -stats;
+done;
