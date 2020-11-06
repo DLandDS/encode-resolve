@@ -13,3 +13,5 @@ for f in *.$1; do
     echo "converting video $f"
     ffmpeg -i "$f" -acodec pcm_s16le -c:v mpeg4 -q:v 2 "$f.mov" -loglevel warning -hide_banner -stats;
 done;
+
+echo "The process is complete!"
