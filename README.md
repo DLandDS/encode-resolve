@@ -1,5 +1,5 @@
 # encode-resolve
-This is a tool that makes videos support to import on davinci resolve
+This is a tool that makes videos support to import for davinci resolve
 
 [Usage]
 <pre>encode-resolve [your_video_format]</pre>
