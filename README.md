@@ -10,7 +10,7 @@ example :
 And this tool will convert all your video in that folder. So, make sure you prepare special folder for it!
 
 [How to install]
-Follow the instruction below!
+Follow the instruction below! </br>
 <pre>
 git clone https://github.com/DLandDS/encode-resolve.git
 cd encode-resolve
