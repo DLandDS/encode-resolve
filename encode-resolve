@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$1" = "" ]; then
-    echo "enter the format file!";
+    echo "Enter the format file!";
     exit;
 fi
 
@@ -11,7 +11,24 @@ for f in *.$1; do
     break;
     fi
     echo "converting video $f"
-    ffmpeg -i "$f" -acodec pcm_s16le -c:v mpeg4 -q:v 2 "$f.mov" -loglevel warning -hide_banner -stats;
+    if test -f "$f.mov"; then
+        echo "$f is converted. Skipping."  
+        continue;
+    elif test -f "$f.part"; then
+        echo "Uncomplete process found! flushing..."
+        rm "$f.part";
+    fi
+    ffmpeg -i "$f" -acodec pcm_s16le -c:v mpeg4 -q:v 2 -f mov "$f.part" -loglevel warning -hide_banner -stats;
+    if [ $? -eq 0 ]; then
+        echo "OK!"
+        mv "$f.part" "$f.mov";
+    else
+        echo "Intterupted!" >&2;
+        echo "Flushing not complete process at "$f""
+        rm "$f.part";
+        echo "The process is complete!"
+        exit;
+    fi    
 done;
 
 echo "The process is complete!"
